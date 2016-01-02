@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:spa="http://integrity.hu/spa">
+<f:view locale="#{loc.locale}">
+	<h:head>
+		<title>#{msg['app.title']}</title>
+	</h:head>
+	<h:body>
+		<h:outputText
+			value="SPA version: #{spa.version} // Locale: #{loc.locale} // Cancel: #{msg['label.cancel']} // Time Zone: #{loc.timeZoneName}" />
+		<h:outputText value="" />
+		<h:inputHidden value="#{win.onLoad}" />
+		<p:commandButton value="DLG" update=":#{editdlg.form}"
+			action="#{editdlg.setActive(true)}" icon="ui-icon-locked"
+			oncomplete="PF('#{editdlg.widget}').show()" />
+		<spa:dialog dlg="#{editdlg}" />
+		<h:outputText value="Active : #{editdlg.active}" />
+		<h:selectOneMenu value="#{loc.language}">
+			<f:selectItems value="#{loc.languages}" />
+		</h:selectOneMenu>
+		<p:commandButton value="TABLE" update=":#{tableDlg.form}"
+			action="#{tableDlg.setActive(true)}" icon="ui-icon-locked"
+			oncomplete="PF('#{tableDlg.widget}).show()" />
+
+		<spa:dialog dlg="#{tableDlg}" />
+		<h:outputText
+			value="loca #{loc.locale} : #{msg.x}  #{msg['x']} #{msg['label.cancel']}" />
+		<h:outputText value="time zones: #{loc.timeZoneName}" />
+	</h:body>
+</f:view>
+</html>

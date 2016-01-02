@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<facelet-taglib xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibary_2_0.xsd"
+	version="2.0">
+	<namespace>http://integrity.hu/spa</namespace>
+	<tag>
+		<tag-name>panel</tag-name>
+		<source>tags/panel.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>dialog</tag-name>
+		<source>tags/dialog.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>prefs</tag-name>
+		<source>tags/prefs.xhtml</source>
+	</tag>
+</facelet-taglib>

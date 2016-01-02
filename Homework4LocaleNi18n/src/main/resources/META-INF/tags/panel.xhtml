@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+	<p:dialog id="d" header="#{msg[dlg.header]}" widgetVar="#{dlg.widget}"
+		modal="true" closable="false" dynamic="true">
+		<ui:include src="#{dlg.src}" />
+		<p:outputPanel id="tb" rendered="#{!dlg.panel and !dlg.customToolbar}">
+			<p:toolbar rendered="#{dlg.editable}">
+				<p:toolbarGroup align="left" rendered="#{dlg.crud}">
+					<p:commandButton value="#{msg['label.cancel']}"
+						action="#{dlg.cancel}" immediate="true"
+						oncomplete="PF('#{dlg.widget}').hide()" />
+					<p:commandButton value="#{msg['label.save']}" icon="ui-icon-disk"
+						action="#{dlg.save}" disabled="#{!dlg.updated}"
+						oncomplete="PF('#{dlg.widget}').hide()" update="#{dlg.update}" />
+					<p:commandButton value="#{msg['label.delete']}"
+						rendered="#{dlg.deletable}" oncomplete="PF('#{dlg.widget}_del').show()"
+						icon="ui-icon-trash" disabled="#{dlg.updated}" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right" rendered="#{!dlg.crud}">
+					<p:commandButton value="#{msg['label.dismiss']}"
+						action="#{dlg.cancel}" immediate="true"
+						oncomplete="PF('#{dlg.widget}').hide()" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			<p:toolbar rendered="#{!dlg.editable}">
+				<p:toolbarGroup align="right" rendered="#{!dlg.crud}">
+					<p:commandButton value="#{msg['label.dismiss']}"
+						action="#{dlg.cancel}" immediate="true"
+						oncomplete="PF('#{dlg.widget}').hide()" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</p:outputPanel>
+	</p:dialog>
+	<p:confirmDialog header="#{msg['label.delete']}"
+		message="#{msg['msg.delete']}" severity="alert" closable="false"
+		widgetVar="#{dlg.widget}_del">
+		<p:commandButton value="#{msg['label.ok']}" action="#{dlg.delete}"
+			update=":#{dlg.form}" oncomplete="PF('#{dlg.widget}_del').hide()" />
+		<p:commandButton value="#{msg['label.cancel']}"
+			onclick="PF('#{dlg.widget}_del').hide();" type="button" />
+	</p:confirmDialog>
+</ui:composition>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+	<h:outputLabel value="#{msg[key]}" />
+	<p:selectOneMenu value="#{prefDlg.bean[key]}">
+		<f:selectItems value="#{loc.localeCodes}" var="code"
+			itemValue="#{loc.getLocale(code)}" itemLabel="#{loc.getLanguageByCode(code)}" />
+		<p:ajax event="change" listener="#{prefDlg.setUpdated(true)}"
+			update=":#{prefDlg.form}:tb" />
+	</p:selectOneMenu>
+
+</ui:composition>

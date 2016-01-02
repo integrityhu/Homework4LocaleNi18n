@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:spa="http://integrity.hu/spa"
+	template="/tbc-layout.xhtml">
+
+	<ui:define name="head">
+		<title><h:outputText value="#{msg['app.title']}" /></title>
+	</ui:define>
+
+	<ui:define name="content">
+		<p:separator />
+		<div class="row">
+			<div class="span6">
+				<p:commandButton value="Activate Simple Bean Dialog"
+					update=":#{editdlg.form}" action="#{editdlg.setActive(true)}"
+					oncomplete="PF('#{editdlg.widget}').show()" />
+				<h:outputText value=" Check dialog is active  : #{editdlg.active}" />
+			</div>
+			<div class="span6">
+				<p:commandButton value="Activate Lazy Table Bean Dialog"
+					update=":#{tableDlg.form}" action="#{tableDlg.setActive(true)}"
+					oncomplete="PF('#{tableDlg.widget}').show()" />
+			</div>
+		</div>
+		<p:separator />
+		<div class="row">
+			<div class="span4">
+				<h:outputText value="Current Language / Locale: " />
+				<h:outputText value="#{loc.language}" />
+			</div>
+			<div class="span4">
+				<h:outputText value="Locale 'Cancel' : " />
+				<h:outputText value="#{msg['label.cancel']}" />
+			</div>
+			<div class="span4">
+				<h:outputText value="Current Time Zone: " />
+				<h:outputText value="#{loc.timeZoneName}" />
+			</div>
+		</div>
+		<p:separator />
+		<div class="row">
+			<div class="span5">
+				<h:outputText value="Available Languages / Locales: " />
+				<h:selectOneMenu value="#{loc.language}">
+					<f:selectItems value="#{loc.languages}" />
+				</h:selectOneMenu>
+			</div>
+			<div class="span7">
+				<h:outputText value="Available Time Zones: " />
+				<h:selectOneMenu value="#{loc.language}">
+					<f:selectItems value="#{loc.languages}" />
+				</h:selectOneMenu>
+			</div>
+		</div>
+	</ui:define>
+	<p:separator />
+	<ui:define name="dialogs">
+		<spa:dialog dlg="#{tableDlg}" />
+		<spa:dialog dlg="#{editdlg}" />
+	</ui:define>
+
+	<ui:define name="bottom">
+		<p:separator />
+		<h:outputText value="SPA version: #{spa.version}" />
+	</ui:define>
+</ui:composition>

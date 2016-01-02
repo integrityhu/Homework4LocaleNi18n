@@ -1,0 +1,16 @@
+/*!
+ * Custom Styles
+ */
+.dbg {
+	font-size: .99em;
+	color: red;
+	display: none;
+}
+
+.grid tr,.grid td {
+	border: none !important;
+}
+
+.layout-box {
+	background-color: pink;
+}

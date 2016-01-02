@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:spa="http://integrity.hu/spa"
+	template="/tbc-layout.xhtml">
+
+	<ui:define name="head">
+		<title><h:outputText value="#{msg['app.title']}" /></title>
+	</ui:define>
+
+	<ui:define name="content">
+		<p:separator />
+		<div class="row">
+			<div class="span6">
+				<p:commandButton value="Activate Simple Bean Dialog"
+					update=":#{editDlg.form}" action="#{editDlg.setActive(true)}"
+					oncomplete="PF('#{editDlg.widget}').show()" />
+				<h:outputText value=" Check dialog is active  : #{editDlg.active}" />
+			</div>
+			<div class="span6">
+				<p:commandButton value="Activate Lazy Table Bean Dialog"
+					update=":#{tableDlg.form}" action="#{tableDlg.setActive(true)}"
+				oncomplete="PF('#{tableDlg.widget}').show()" />
+			</div>
+		</div>
+		<p:separator />
+		<div class="row">
+			<div class="span3">
+				<h:outputText value="Current Locale: " />
+				<h:outputText value="#{loc.language}" />
+			</div>
+			<div class="span4">
+					<p:commandButton value="#{msg['label.preferences']}"
+						update=":#{prefDlg.form}" action="#{prefDlg.setActive(true)}"
+						oncomplete="PF('#{prefDlg.widget}').show()" />
+			</div>
+			<div class="span5">
+				<h:outputText value="Current Time Zone: " />
+				<h:outputText value="#{loc.timeZoneName}" />
+				<br />
+				<h:outputText value="Current Time: " />
+				<h:outputText value="#{session.lastAccessedTime}">
+					<f:convertDateTime locale="#{loc.locale}" type="both"
+						dateStyle="full" timeZone="#{loc.timeZone}" />
+				</h:outputText>
+			</div>
+		</div>
+		<p:separator />
+		<div class="row">
+			<div class="span5">
+				<h:outputText value="Available Languages / Locales: " />
+				<h:selectOneMenu>
+					<f:selectItems value="#{loc.languages}" />
+				</h:selectOneMenu>
+			</div>
+			<div class="span7">
+				<h:outputText value="Available Time Zones: " />
+				<h:selectOneMenu>
+					<f:selectItems value="#{loc.timeZoneCodes}" />
+				</h:selectOneMenu>
+			</div>
+		</div>
+	</ui:define>
+	<p:separator />
+	<ui:define name="dialogs">
+		<spa:dialog dlg="#{tableDlg}" />
+		<spa:dialog dlg="#{editDlg}" />
+		<spa:prefs />
+	</ui:define>
+
+	<ui:define name="bottom">
+		<p:separator />
+		<h:outputText value="SPA version: #{spa.version}" />
+	</ui:define>
+</ui:composition>

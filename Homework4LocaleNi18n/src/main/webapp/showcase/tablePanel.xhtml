@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dataTable id="pTable" var="rec" value="#{tableDlg.bean.dataModel}"
+		selection="#{tableDlg.bean.selected}" paginator="true" rows="10"
+		paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink}
+				{PreviousPageLink} {CurrentPageReport} {NextPageLink}
+				{LastPageLink}"
+		rowsPerPageTemplate="10,20,50,100" selectionMode="single" lazy="true">
+
+		<f:facet name="header">
+			<h:outputText value="Filter :" />
+			<p:selectOneMenu value="#{tableDlg.bean.options.filterMode}">
+				<f:selectItems value="#{tableDlg.bean.options.filterModes}" />
+			</p:selectOneMenu>
+		</f:facet>
+
+		<p:column headerText="ID">
+			<h:outputText value="#{rec.id}" />
+		</p:column>
+		<p:column headerText="Key" sortBy="#{rec.key}" filterBy="#{rec.key}">
+			<h:outputText value="#{rec.key}" />
+		</p:column>
+
+	</p:dataTable>
+</ui:composition>
